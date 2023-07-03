@@ -1,7 +1,18 @@
-export default function LoginPage() {
+import { styled } from "styled-components";
+
+const MessageDiv = styled.div`
+  background-color: rgb(52, 53, 65);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+`;
+export default function WelcomePage() {
   return (
     <div className="text-center">
-      <header className="d-flex align-items-cente  justify-content-center">
+      <MessageDiv>
         <p>
           Welcome to ChatGPT
           <br /> Log in with your OpenAI account to continue
@@ -14,7 +25,7 @@ export default function LoginPage() {
             Sign up
           </button>
         </div>
-      </header>
+      </MessageDiv>
     </div>
   );
 }

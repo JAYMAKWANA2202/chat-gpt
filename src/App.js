@@ -1,11 +1,11 @@
 import "./App.css";
-import LoginPage from "./pages/welcome";
+import Router from "./utils/route";
 
 function App() {
   return (
-    <div>
-      <LoginPage></LoginPage>
-    </div>
+    <>
+      <Router />
+    </>
   );
 }
 
