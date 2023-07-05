@@ -9,6 +9,8 @@ const MessageDiv = styled.div`
   justify-content: center;
   color: white;
 `;
+
+
 export default function WelcomePage() {
   return (
     <div className="text-center">
