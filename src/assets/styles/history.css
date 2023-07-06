@@ -2,10 +2,8 @@
   flex-grow: 1;
   padding: 16px;
 }
-.middle-section h3 {
-  color: aliceblue;
-}
 
 .middle-section h3 {
+  color: aliceblue;
   margin-top: 0;
 }

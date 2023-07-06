@@ -7,7 +7,9 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="above-section">
-        <button className="new-chat-button">New Chat</button>
+        <button className="new-chat-button">
+          <span>+</span>New Chat
+        </button>
       </div>
       <History />
       <Below />
