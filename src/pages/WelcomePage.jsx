@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
 const MessageDiv = styled.div`
@@ -20,12 +21,12 @@ export default function WelcomePage() {
           <br /> Log in with your OpenAI account to continue
         </p>
         <div>
-          <button className="btn btn-success m-2" style={{ float: "left" }}>
+          <Link to='/login' className="btn btn-success m-2" style={{ float: "left" }}>
             Login
-          </button>
-          <button className="btn btn-success m-2" style={{ float: "left" }}>
+          </Link>
+          <Link to='/signup' className="btn btn-success m-2" style={{ float: "left" }}>
             Sign up
-          </button>
+          </Link>
         </div>
       </MessageDiv>
     </div>
