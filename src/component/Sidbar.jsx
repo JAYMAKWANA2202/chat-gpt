@@ -24,49 +24,45 @@ const Sidebar = () => {
     setToggle(true);
   };
 
+  const ResetDataEvent = () => {
+    setNewChat([])
+  }
+
   return (
     <>
       {toggle ? (
         <aside className="sidebar">
           <div className="above-section">
-            <div style={{ textAlign: "right", marginBottom: "20px" }}>
+            <div className="row">
+
+              <button className="new-chat-button col-9 mr-2" onClick={clickHandler}>
+                <i class="fa fa-plus" style={{ marginRight: '8px' }}></i>New Chat
+              </button>
               <button
-                style={{
-                  backgroundColor: "#202123",
-                  border: 0,
-                  borderRadius: "50%",
-                  width: "30px",
-                  color: "white",
-                  height: "30px",
-                  fontSize: "18px",
-                  color: 'white'
-                }}
+                className="new-chat-button col-2"
                 onClick={closeSidebar}
               >
-                <i className="fa fa-window-close" style={{ color: 'white' }}></i>
+                <i className="fa fa-times m-auto" style={{ fontSize: '20px' }}></i>
               </button>
             </div>
-            <button className="new-chat-button" onClick={clickHandler}>
-              <span>+</span>New Chat
-            </button>
           </div>
           <div className="middle-section">
             {/* <h3>Search History</h3> */}
             {newChat.map((data) => (
               <>
-                <div style={{ color: 'white', backgroundColor: 'rgba(52,53,65,0.9)', margin: '5px', borderRadius: '5px', height: '40px', paddingTop: '8px' }}> <i class="fa-solid fa-messages" style={{ color: 'white' }}></i>{data.lable}</div>
+                <History id={data.id} lable={data.lable} />
+
               </>
             ))}
           </div>
-          <Below />
+          <Below ResetData={ResetDataEvent} />
         </aside>
       ) : (<button
         style={{
           border: 0,
-          borderRadius: "50%",
-          width: "30px",
-          height: "30px",
+          backgroundColor: 'transparent',
           fontSize: "30px",
+          margin: '20px'
         }}
         onClick={openBox}
       >
