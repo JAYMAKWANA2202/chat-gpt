@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../assets/styles/sidbar.css";
 import History from "./History";
 import Below from "./Below";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Sidebar = () => {
+const Sidebar = ({ toggle, setToggleValue }) => {
   const [newChat, setNewChat] = useState([])
-  const [toggle, setToggle] = useState(true)
+
+  // const [toggle, setToggle] = useState(true)
 
   const clickHandler = () => {
     var newData = {
@@ -17,11 +17,11 @@ const Sidebar = () => {
   };
 
   const closeSidebar = () => {
-    setToggle(false);
+    setToggleValue(false);
   };
 
   const openBox = () => {
-    setToggle(true);
+    setToggleValue(true);
   };
 
   const ResetDataEvent = () => {
@@ -35,14 +35,11 @@ const Sidebar = () => {
           <div className="above-section">
             <div className="row">
 
-              <button className="new-chat-button col-9 mr-2" onClick={clickHandler}>
+              <button className="new-chat-button col-9" onClick={clickHandler}>
                 <i class="fa fa-plus" style={{ marginRight: '8px' }}></i>New Chat
               </button>
-              <button
-                className="new-chat-button col-2"
-                onClick={closeSidebar}
-              >
-                <i className="fa fa-times m-auto" style={{ fontSize: '20px' }}></i>
+              <button className="new-chat-button col-2" style={{ marginLeft: '10px' }} onClick={closeSidebar}>
+                <i class="fa fa-times"></i>
               </button>
             </div>
           </div>
@@ -62,7 +59,10 @@ const Sidebar = () => {
           border: 0,
           backgroundColor: 'transparent',
           fontSize: "30px",
-          margin: '20px'
+          marginLeft: '20px',
+          marginRight: '20px',
+          float: 'left',
+          color: 'white'
         }}
         onClick={openBox}
       >
