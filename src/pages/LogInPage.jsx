@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
+import axios from 'axios';
+import LoginImage from '../assets/images/NewLogin.jpg'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
-    },
-    image: {
-        backgroundImage: 'url(https://source.unsplash.com/random)',
-        backgroundSize: 'cover',
     },
     paper: {
         margin: theme.spacing(8, 4),
@@ -24,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
     },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+    image: {
+        backgroundImage: `url(${LoginImage})`,
+        backgroundSize: 'cover',
     },
     form: {
         width: '100%',
@@ -37,16 +33,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 async function loginUser(credentials) {
-    return fetch('https://dataplor.onrender.com/processUserInfo/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-        .then(data => data.json())
+    try {
+        const response = await axios.post(
+            'https://dataplor.onrender.com/processUserInfo/login',
+            credentials
+        );
+        console.log(response.data)
+        return response.data;
+    } catch (error) {
+        // Handle any error that occurs during the request
+        console.error('Error:', error.message);
+        throw error; // Rethrow the error to be handled by the caller
+    }
 }
+
 
 export default function LoginPage() {
     const classes = useStyles();
@@ -55,7 +57,6 @@ export default function LoginPage() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log('submit', username, password)
         const response = await loginUser({
             username,
             password
@@ -78,15 +79,10 @@ export default function LoginPage() {
     return (
         <Grid container className={classes.root}>
             <CssBaseline />
-            <Grid item xs={false} md={7} className={classes.image} />
-            <Grid item xs={12} md={5} component={Paper} elevation={6} square>
+            <Grid item xs={12} md={5} component={Paper}>
                 <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Login
-                    </Typography>
+                    <div><img src={LoginImage} alt='logo' width='320px' height='100px' style={{ marginBottom: '30%' }} /></div>
+                    <p style={{ textAlign: 'left', width: '100%', margin: '0', fontSize: '16px' }}>Sign in</p>
                     <form className={classes.form} noValidate onSubmit={handleSubmit}>
                         <TextField
                             variant="outlined"
@@ -95,7 +91,7 @@ export default function LoginPage() {
                             fullWidth
                             id="email"
                             name="email"
-                            label="Email Address"
+                            placeholder="Email Address *"
                             onChange={e => setUserName(e.target.value)}
                         />
                         <TextField
@@ -105,22 +101,40 @@ export default function LoginPage() {
                             fullWidth
                             id="password"
                             name="password"
-                            label="Password"
+                            placeholder="Password *"
                             type="password"
                             onChange={e => setPassword(e.target.value)}
                         />
                         <Button
                             type="submit"
-                            fullWidth
                             variant="contained"
                             color="primary"
                             className={classes.submit}
+                            style={{ float: 'left' }}
                         >
-                            Login
+                            Login &nbsp;<i className='fa fa-long-arrow-right'></i>
                         </Button>
+                        <div style={{ width: '100%', textAlign: 'right', marginTop: '8%' }}><Link to='/forgot-password' style={{ textDecoration: 'none', color: 'black', pointer: 'cursor' }}>Forgot your password?</Link></div>
                     </form>
+                    <Link to='/signup' style={{ width: '100%', textDecoration: 'none' }}>
+                        <Button
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            className={classes.submit}
+                            style={{ backgroundColor: 'black', color: 'white' }}
+                        >
+                            CREATE NEW ACCOUNT
+                        </Button>
+                    </Link>
+                    <div style={{ color: '#b2b2b2' }}>
+                        <p>Terms and conditions &nbsp; <i className='fa fa-circle' style={{ fontSize: '8px' }}></i> &nbsp; Privacy Policy</p>
+                    </div>
                 </div>
             </Grid>
+            <Grid item sm={false} md={7} className={classes.image} >
+            </Grid>
+
         </Grid>
     );
 }

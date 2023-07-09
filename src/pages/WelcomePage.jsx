@@ -16,10 +16,9 @@ export default function WelcomePage() {
   return (
     <div className="text-center">
       <MessageDiv>
-        <p>
-          Welcome to ChatGPT
-          <br /> Log in with your OpenAI account to continue
-        </p>
+        <h3>
+          Welcome to Dataplor
+        </h3>
         <div>
           <Link to='/login' className="btn btn-success m-2" style={{ float: "left" }}>
             Login
