@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -6,9 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import swal from 'sweetalert';
-import axios from 'axios';
-import LoginImage from '../assets/images/NewLogin.jpg'
+import SignupImage from '../assets/images/signupposter.png'
+import Logo from '../assets/images/logo.png'
 import { InputLabel, MenuItem, Select } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,10 +19,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        height: '100vh'
     },
     image: {
-        backgroundImage: `url(${LoginImage})`,
+        backgroundImage: `url(${SignupImage})`,
         backgroundSize: 'cover',
+        width: '100%'
     },
     form: {
         width: '100%',
@@ -35,92 +36,50 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-async function loginUser(credentials) {
-    try {
-        const response = await axios.post(
-            'https://dataplor.onrender.com/processUserInfo/login',
-            credentials
-        );
-        console.log(response.data)
-        return response.data;
-    } catch (error) {
-        // Handle any error that occurs during the request
-        console.error('Error:', error.message);
-        throw error; // Rethrow the error to be handled by the caller
-    }
-}
-
-
 export default function LoginPage() {
     const classes = useStyles();
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
-
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const response = await loginUser({
-            username,
-            password
-        });
-        if ('accessToken' in response) {
-            swal("Success", response.message, "success", {
-                buttons: false,
-                timer: 2000,
-            })
-                .then((value) => {
-                    localStorage.setItem('accessToken', response['accessToken']);
-                    localStorage.setItem('user', JSON.stringify(response['user']));
-                    window.location.href = "/profile";
-                });
-        } else {
-            swal("Failed", response.message, "error");
-        }
-    }
 
     return (
         <Grid container className={classes.root}>
             <CssBaseline />
-            <Grid item xs={12} md={5} component={Paper}>
+            <Grid item xs={12} md={8} component={Paper}>
                 <div className={classes.paper}>
-                    <div><img src={LoginImage} alt='logo' width='320px' height='100px' style={{ marginBottom: '30%' }} /></div>
+                    <div><img src={Logo} alt='logo' width='250px' height='40px' style={{ marginBottom: '30%' }} /></div>
                     <p style={{ textAlign: 'center', width: '100%', margin: '0', fontSize: '16px' }}>Sign up to Dataplor</p>
-                    <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                    <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
                             margin="normal"
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                             required
                             id="firstName"
                             name="firstName"
                             placeholder="First Name *"
-                            onChange={e => setUserName(e.target.value)}
                         />
                         <TextField
                             variant="outlined"
                             margin="normal"
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                             required
                             id="lastName"
                             name="lastName"
                             placeholder="Last Name *"
-                            onChange={e => setPassword(e.target.value)}
                         />
                         <TextField
                             variant="outlined"
                             margin="normal"
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                             required
                             id="email"
                             name="email"
                             placeholder="Email Address *"
-                            onChange={e => setPassword(e.target.value)}
                         />
-                        <InputLabel id="countryLabel">Country</InputLabel>
+                        <InputLabel id="countryLabel" style={{ marginLeft: '20%', width: '60%' }}>Country</InputLabel>
                         <Select
                             labelId="countryLabel"
                             id="country"
                             label="Country"
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                         >
                             <MenuItem value='india'>India</MenuItem>
                             <MenuItem value='US'>US</MenuItem>
@@ -130,16 +89,15 @@ export default function LoginPage() {
                             variant="outlined"
                             margin="normal"
                             required
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                             id="Phone"
                             name="Phone"
                             placeholder="Phone *"
-                            onChange={e => setPassword(e.target.value)}
                         />
                         <Button
                             type="submit"
                             variant="contained"
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                             color="primary"
                             className={classes.submit}
                         >
@@ -149,10 +107,9 @@ export default function LoginPage() {
                     <Link to='/login' style={{ width: '100%', textDecoration: 'none' }}>
                         <Button
                             type="button"
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%', backgroundColor: 'black', color: 'white' }}
                             variant="contained"
                             className={classes.submit}
-                            style={{ backgroundColor: 'black', color: 'white' }}
                         >
                             BACK TO LOGIN
                         </Button>
@@ -162,7 +119,7 @@ export default function LoginPage() {
                     </div>
                 </div>
             </Grid>
-            <Grid item xs={false} md={7} className={classes.image} >
+            <Grid item xs={false} md={4} className={classes.image} >
             </Grid>
 
         </Grid>

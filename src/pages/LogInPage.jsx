@@ -8,7 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import axios from 'axios';
-import LoginImage from '../assets/images/NewLogin.jpg'
+import LoginImage from '../assets/images/loginposter.png'
+import Logo from '../assets/images/logo.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,10 +20,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        height: '100vh'
     },
     image: {
         backgroundImage: `url(${LoginImage})`,
-        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
     },
     form: {
         width: '100%',
@@ -79,16 +82,16 @@ export default function LoginPage() {
     return (
         <Grid container className={classes.root}>
             <CssBaseline />
-            <Grid item xs={12} md={5} component={Paper}>
+            <Grid item xs={12} md={7} component={Paper}>
                 <div className={classes.paper}>
-                    <div><img src={LoginImage} alt='logo' width='320px' height='100px' style={{ marginBottom: '30%' }} /></div>
-                    <p style={{ textAlign: 'left', width: '100%', margin: '0', fontSize: '16px' }}>Sign in</p>
+                    <div><img src={Logo} alt='logo' width='220px' height='40px' style={{ marginBottom: '30%' }} /></div>
+                    <p style={{ marginLeft: '40%', width: '100%', fontSize: '16px', margin: '0' }}>Sign in</p>
                     <form className={classes.form} noValidate onSubmit={handleSubmit}>
                         <TextField
                             variant="outlined"
                             margin="normal"
                             required
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                             id="email"
                             name="email"
                             placeholder="Email Address *"
@@ -98,31 +101,30 @@ export default function LoginPage() {
                             variant="outlined"
                             margin="normal"
                             required
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%' }}
                             id="password"
                             name="password"
                             placeholder="Password *"
                             type="password"
                             onChange={e => setPassword(e.target.value)}
-                        />
+                        /><br />
                         <Button
                             type="submit"
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            style={{ float: 'left' }}
+                            style={{ float: 'left', marginLeft: '20%' }}
                         >
                             Login &nbsp;<i className='fa fa-long-arrow-right'></i>
                         </Button>
-                        <div style={{ width: '100%', textAlign: 'right', marginTop: '8%' }}><Link to='/forgot-password' style={{ textDecoration: 'none', color: 'black', pointer: 'cursor' }}>Forgot your password?</Link></div>
+                        <div style={{ width: '100%', textAlign: 'right', marginTop: '5%', paddingRight: '20%' }}><Link to='/forgot-password' style={{ textDecoration: 'none', color: 'black', pointer: 'cursor' }}>Forgot your password?</Link></div>
                     </form>
                     <Link to='/signup' style={{ width: '100%', textDecoration: 'none' }}>
                         <Button
                             type="button"
-                            fullWidth
+                            style={{ marginLeft: '20%', width: '60%', backgroundColor: 'black', color: 'white' }}
                             variant="contained"
                             className={classes.submit}
-                            style={{ backgroundColor: 'black', color: 'white' }}
                         >
                             CREATE NEW ACCOUNT
                         </Button>
@@ -132,7 +134,7 @@ export default function LoginPage() {
                     </div>
                 </div>
             </Grid>
-            <Grid item sm={false} md={7} className={classes.image} >
+            <Grid item sm={false} md={5} className={classes.image}>
             </Grid>
 
         </Grid>
